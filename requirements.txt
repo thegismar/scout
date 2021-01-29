@@ -1,0 +1,2 @@
+rich>=9.10.0
+eth-brownie>=1.13.0
