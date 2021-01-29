@@ -10,7 +10,7 @@ console = Console()
 
 def main():
     data_gauge = Gauge( "badger_contract", "", ["contract", "param"] )
-    timing = Gauge("badger_timing", "", ["vault", "action"])
+    timing = Gauge("badger_timing", "", ["contract", "action"])
     start_http_server( 8801 )
     contracts = scripts.data.get_data()
     for block in chain.new_blocks():
