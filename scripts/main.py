@@ -24,8 +24,11 @@ def main():
     rewards_gauge = Gauge( 'rewards', '', ['token'] )
     start_http_server( 8801 )
     setts = scripts.data.get_data()
-    for block in chain.new_blocks():
+    last_block = chain.height - 21
+    for block in chain.new_blocks( height_buffer=20 ):
+        assert(block.number == last_block + 1, 'Skipped a block!')
         console.rule( title=f'[green]{block.number}' )
+        console.print( f'Calculating reward holdings..' )
         badger_rewards = badger.balanceOf( tree.address ) / 1e18
         digg_rewards = digg.balanceOf( tree.address ) / 1e9
         rewards_gauge.labels( 'badger' ).set( badger_rewards )
@@ -35,3 +38,5 @@ def main():
             console.print( f'Processing [bold]{sett.name}...' )
             for param, value in info.items():
                 data_gauge.labels( sett.name, param ).set( value )
+
+        last_block = block.number
