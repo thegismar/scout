@@ -27,7 +27,8 @@ class Sett:
         try:
             info = {
                     "pricePerShare": self.sett.getPricePerFullShare() / scale,
-                    "totalSupply"  : self.sett.totalSupply() / scale
+                    "totalSupply"  : self.sett.totalSupply() / scale, "balance": self.sett.balance() / scale,
+                    "available"    : self.sett.available() / scale
                     }
         except ValueError as e:
             info = {}
@@ -50,11 +51,11 @@ setts = {
 
 
 def get_data():
-    return [Sett( name=f'Sett_{name}', sett=interface.Sett( sett ) ) for name, sett in setts.items()]
+    return [Sett( name=f'sett : {name}', sett=interface.Sett( sett ) ) for name, sett in setts.items()]
 
 
 if __name__ == '__main__':
-    for s in [Sett( name=f'Sett_{name}', sett=interface.Sett( sett ) ) for name, sett in setts.items()]:
+    for s in [Sett( name=f'sett :{name}', sett=interface.Sett( sett ) ) for name, sett in setts.items()]:
         info = s.describe()
         console.rule( title=s.name )
         for key, value in info.items():
