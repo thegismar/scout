@@ -64,7 +64,7 @@ class Digg:
         try:
             info = {
                     "lastUpdated":  self.digg_oracle.providerReports( oracle_provider, 1 )[0],
-                    "value"      : self.digg_oracle.providerReports( oracle_provider, 1 )[1] / 1e18
+                    "oracle_price"      : self.digg_oracle.providerReports( oracle_provider, 1 )[1] / 1e18
                     }
         except ValueError as e:
             info = {}
