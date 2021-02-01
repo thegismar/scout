@@ -20,10 +20,12 @@ tree = interface.Tree( tree )
 
 
 def main():
-    data_gauge = Gauge( "sett", "", ["sett", "param"] )
+    sett_gauge = Gauge( "sett", "", ["sett", "param"] )
+    treasury_gauge = Gauge("treasury", '', ['token', 'param'])
     rewards_gauge = Gauge( 'rewards', '', ['token'] )
     start_http_server( 8801 )
-    setts = scripts.data.get_data()
+    setts = scripts.data.get_sett_data()
+    treasury = scripts.data.get_treasury_data()
     last_block = chain.height - 21
     for block in chain.new_blocks( height_buffer=20 ):
         assert(block.number == last_block + 1, 'Skipped a block!')
@@ -37,6 +39,11 @@ def main():
             info = sett.describe()
             console.print( f'Processing [bold]{sett.name}...' )
             for param, value in info.items():
-                data_gauge.labels( sett.name, param ).set( value )
+                sett_gauge .labels( sett.name, param ).set( value )
+        for token in treasury:
+            info = token.describe()
+            console.print( f'Processing [bold]{token.name}...' )
+            for param, value in info.items():
+                treasury_gauge.labels( token.name, param ).set( value )
 
         last_block = block.number
