@@ -74,16 +74,16 @@ class Digg:
 
 
 setts = {
-        "badger"         : "0x19D97D8fA813EE2f51aD4B4e04EA08bAf4DFfC28",
-        "renCrv"         : "0x6dEf55d2e18486B9dDfaA075bc4e4EE0B28c1545",
-        "sbtcCrv"        : "0xd04c48A53c111300aD41190D63681ed3dAd998eC",
-        "tbtcCrv"        : "0xb9D076fDe463dbc9f915E5392F807315Bf940334",
-        "uniBadgerWbtc"  : "0x235c9e24D3FB2FAFd58a2E49D454Fdcd2DBf7FF1",
-        "sushiBadgerWbtc": '0x1862A18181346EBd9EdAf800804f89190DeF24a5',
-        "harvest"        : "0xAf5A1DECfa95BAF63E0084a35c62592B774A2A87",
-        "digg"           : "0x7e7E112A68d8D2E221E11047a72fFC1065c38e1a",
-        "uniDiggWbtc"    : "0xC17078FDd324CC473F8175Dc5290fae5f2E84714",
-        "sushiDiggWbtc"  : "0x88128580ACdD9c04Ce47AFcE196875747bF2A9f6"
+        "bbadger"         : "0x19D97D8fA813EE2f51aD4B4e04EA08bAf4DFfC28",
+        "bRenCrv"         : "0x6dEf55d2e18486B9dDfaA075bc4e4EE0B28c1545",
+        "bSbtcCrv"        : "0xd04c48A53c111300aD41190D63681ed3dAd998eC",
+        "bTbtcCrv"        : "0xb9D076fDe463dbc9f915E5392F807315Bf940334",
+        "bUniBadgerWbtc"  : "0x235c9e24D3FB2FAFd58a2E49D454Fdcd2DBf7FF1",
+        "bSlpBadgerWbtc": '0x1862A18181346EBd9EdAf800804f89190DeF24a5',
+        "bHarvestRenCrv"        : "0xAf5A1DECfa95BAF63E0084a35c62592B774A2A87",
+        "bDigg"           : "0x7e7E112A68d8D2E221E11047a72fFC1065c38e1a",
+        "bUniDiggWbtc"    : "0xC17078FDd324CC473F8175Dc5290fae5f2E84714",
+        "bSlpDiggWbtc"  : "0x88128580ACdD9c04Ce47AFcE196875747bF2A9f6"
         }
 
 tokens = {
@@ -92,8 +92,8 @@ tokens = {
         'BADGER'      : '0x3472A5A71965499acd81997a54BBA8D852C6E53d',
         'crvRenWBTC'  : '0x49849C98ae39Fff122806C06791Fa73784FB3675',
         'crvRenWSBTC' : '0x075b1bb99792c9E1041bA13afEf80C91a1e70fB3',
-        'SLP_wbtceth' : '0xceff51756c56ceffca006cd410b03ffc46dd3a58',
-        'tbtc/sbtcCrv': '0x64eda51d3Ad40D56b9dFc5554E06F94e1Dd786Fd'
+        'slpWbtcEth' : '0xceff51756c56ceffca006cd410b03ffc46dd3a58',
+        'crvTbtcSbtc': '0x64eda51d3Ad40D56b9dFc5554E06F94e1Dd786Fd'
         }
 
 oracle = '0x058ec2Bf15011095a25670b618A129c043e2162E'
