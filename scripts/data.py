@@ -5,7 +5,6 @@ from brownie.network.contract import InterfaceContainer
 from rich.console import Console
 import logging
 from rich.logging import RichHandler
-from prometheus_client import Gauge, start_http_server
 
 warnings.simplefilter( "ignore" )
 
@@ -56,6 +55,24 @@ class Treasury:
         return info
 
 
+@dataclass
+class Digg:
+    name: str
+    digg_oracle: InterfaceContainer
+
+    def describe(self):
+        try:
+            info = {
+                    "lastUpdated":  self.digg_oracle.providerReports( oracle_provider, 1 )[0],
+                    "value"      : self.digg_oracle.providerReports( oracle_provider, 1 )[1] / 1e18
+                    }
+        except ValueError as e:
+            info = {}
+            log.exception( str( e ) )
+
+        return info
+
+
 setts = {
         "badger"         : "0x19D97D8fA813EE2f51aD4B4e04EA08bAf4DFfC28",
         "renCrv"         : "0x6dEf55d2e18486B9dDfaA075bc4e4EE0B28c1545",
@@ -79,6 +96,9 @@ tokens = {
         'tbtc/sbtcCrv': '0x64eda51d3Ad40D56b9dFc5554E06F94e1Dd786Fd'
         }
 
+oracle = '0x058ec2Bf15011095a25670b618A129c043e2162E'
+oracle_provider = '0x72dc16CFa95beB42aeebD2B10F22E55bD17Ce976'
+
 
 def get_sett_data():
     return [Sett( name=f'{name}', sett=interface.Sett( sett ) ) for name, sett in setts.items()]
@@ -88,14 +108,22 @@ def get_treasury_data():
     return [Treasury( name=f'{name}', token=interface.ERC20( token ) ) for name, token in tokens.items()]
 
 
+def get_digg_data():
+    return Digg( name='Digg Prices', digg_oracle=interface.Oracle( oracle ) )
+
+
 def main():
     # for s in [Sett( name=f'{name}', sett=interface.Sett( sett ) ) for name, sett in setts.items()]:
     #     info = s.describe()
     #     console.rule( title=s.name )
     #     for key, value in info.items():
     #         console.print( f'[blue]{key} : [red] {value}' )
-    for s in [Treasury( name=f'{name}', token=interface.ERC20( token ) ) for name, token in tokens.items()]:
-        info = s.describe()
-        console.rule( title=s.name )
-        for key, value in info.items():
-            console.print( f'[blue]{key} : [red] {value}' )
+    # for s in [Treasury( name=f'{name}', token=interface.ERC20( token ) ) for name, token in tokens.items()]:
+    #     info = s.describe()
+    #     console.rule( title=s.name )
+    #     for key, value in info.items():
+    #         console.print( f'[blue]{key} : [red] {value}' )
+    d = get_digg_data()
+    info = d.describe()
+    for key, value in info.items():
+        console.print( f'[blue]{key} : [red] {value}' )

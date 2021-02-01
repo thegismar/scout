@@ -23,9 +23,11 @@ def main():
     sett_gauge = Gauge( "sett", "", ["sett", "param"] )
     treasury_gauge = Gauge("treasury", '', ['token', 'param'])
     rewards_gauge = Gauge( 'rewards', '', ['token'] )
+    digg_gauge = Gauge('digg_price', '', ['value'])
     start_http_server( 8801 )
     setts = scripts.data.get_sett_data()
     treasury = scripts.data.get_treasury_data()
+    digg_prices = scripts.data.get_digg_data()
     last_block = chain.height - 21
     for block in chain.new_blocks( height_buffer=20 ):
         assert(block.number == last_block + 1, 'Skipped a block!')
@@ -45,5 +47,9 @@ def main():
             console.print( f'Processing [bold]{token.name}...' )
             for param, value in info.items():
                 treasury_gauge.labels( token.name, param ).set( value )
+        price = digg_prices.describe()
+        for param, value in price.items():
+            console.print( f'Processing digg [bold]{param}...' )
+            digg_gauge.labels(param).set(value)
 
         last_block = block.number
