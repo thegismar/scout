@@ -19,8 +19,8 @@ digg = interface.Digg( tokens['digg'] )
 wbtc = interface.ERC20( '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599' )
 tree = interface.Tree( tree )
 
-sushi = interface.Pair('0x9a13867048e01c663ce8Ce2fE0cDAE69Ff9F35E3')
-uni = interface.Pair('0xe86204c4eddd2f70ee00ead6805f917671f56c52')
+slpDiggWbtc = interface.Pair('0x9a13867048e01c663ce8Ce2fE0cDAE69Ff9F35E3')
+uniDiggWbtc = interface.Pair('0xe86204c4eddd2f70ee00ead6805f917671f56c52')
 
 
 def main():
@@ -62,8 +62,8 @@ def main():
             console.print( f'Processing digg [bold]{param}...' )
             digg_gauge.labels( param ).set( value )
 
-        digg_sushi_price = (sushi.getReserves()[0] / 1e8) / (sushi.getReserves()[1] / 1e9)
-        digg_uni_price = (uni.getReserves()[0] / 1e8) / (uni.getReserves()[1] / 1e9)
+        digg_sushi_price = (slpDiggWbtc.getReserves()[0] / 1e8) / (sushi.getReserves()[1] / 1e9)
+        digg_uni_price = (uniDiggWbtc.getReserves()[0] / 1e8) / (uni.getReserves()[1] / 1e9)
 
         digg_gauge.labels( 'sushiswap' ).set(digg_sushi_price)
         digg_gauge.labels('uniswap').set(digg_uni_price)
